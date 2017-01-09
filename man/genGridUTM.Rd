@@ -26,6 +26,24 @@ genGridUTM(tilesize, extent, res, overlap = NULL, polygon = FALSE,
 \description{
 Generate grid from raster data in a UTM projection
 }
+\examples{
+\dontrun{
+library(bfastSpatial)
+data(tura)
+
+tiles <- genGridUTM(50, extent(tura), 30)
+print(tiles)
+
+tiles <- genGridUTM(50, extent(tura), 30, polygon = TRUE, prj = projection(tura))
+print(tiles)
+plot(tura, 2)
+plot(tiles$poly, add = TRUE)
+
+tiles <- genGridUTM(50, extent(tura), 30, overlap = 5, polygon = TRUE, prj = projection(tura))
+plot(tura, 2)
+plot(tiles$poly, add = TRUE)
+}
+}
 \author{
 Ben DeVries
 }
