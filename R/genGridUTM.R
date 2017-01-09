@@ -15,7 +15,24 @@
 #' @import raster
 #' @import maptools
 #' @export
-
+#' 
+#' @examples
+#' \dontrun{
+#' library(bfastSpatial)
+#' data(tura)
+#' 
+#' tiles <- genGridUTM(50, extent(tura), 30)
+#' print(tiles)
+#' 
+#' tiles <- genGridUTM(50, extent(tura), 30, polygon = TRUE, prj = projection(tura))
+#' print(tiles)
+#' plot(tura, 2)
+#' plot(tiles$poly, add = TRUE)
+#' 
+#' tiles <- genGridUTM(50, extent(tura), 30, overlap = 5, polygon = TRUE, prj = projection(tura))
+#' plot(tura, 2)
+#' plot(tiles$poly, add = TRUE)
+#' }
 
 genGridUTM <-
   function(tilesize, extent, res, overlap=NULL, polygon=FALSE, prj=NULL)
@@ -92,12 +109,12 @@ genGridUTM <-
         prj <- CRS("+proj=utm +zone=1 +ellps=WGS84 +units=m +no_defs")
       }
       
-      poly <- as(extent(tiles[1,]), "SpatialPolygons")
+      poly <- as(extent(as.numeric(tiles[1,])), "SpatialPolygons")
       proj4string(poly) <- prj
       poly <- spChFIDs(poly, row.names(tiles)[1])
       
       for(i in 2:nrow(tiles)){
-        tmp <- as(extent(tiles[i, ]), "SpatialPolygons")
+        tmp <- as(extent(as.numeric(tiles[i, ])), "SpatialPolygons")
         proj4string(tmp) <- prj
         tmp <- spChFIDs(tmp, row.names(tiles)[i])
         poly <- spRbind(poly, tmp)
