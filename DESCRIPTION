@@ -1,0 +1,10 @@
+Package: rastergrid
+Type: Package
+Title: Grid raster data into smaller cells
+Version: 0.1
+Date: 2017-01-09
+Author: Ben DeVries
+Maintainer: Who to complain to <bdv@umd.edu>
+Description: Grid raster data into smaller cells
+License: MIT
+RoxygenNote: 5.0.1
